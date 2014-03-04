@@ -612,3 +612,4 @@ CREATE TABLE `cloud`.`vgpu_types` (
 ) ENGINE=InnoDB CHARSET=utf8;
 
 ALTER TABLE `cloud`.`vpc_offerings` ADD COLUMN supports_distributed_router boolean default false;
+ALTER TABLE `cloud`.`vpc` ADD COLUMN uses_distributed_router  boolean default false;
