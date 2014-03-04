@@ -611,3 +611,4 @@ CREATE TABLE `cloud`.`vgpu_types` (
   CONSTRAINT `fk_vgpu_types__gpu_group_id` FOREIGN KEY (`gpu_group_id`) REFERENCES `host_gpu_groups` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB CHARSET=utf8;
 
+ALTER TABLE `cloud`.`vpc_offerings` ADD COLUMN supports_distributed_router boolean default false;
