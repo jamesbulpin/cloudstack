@@ -175,10 +175,10 @@ public abstract class LibvirtServerDiscoverer extends DiscovererBase implements 
                 throw new DiscoveredWithErrorException("Authentication error");
             }
 
-            if (!SSHCmdHelper.sshExecuteCmd(sshConnection, "lsmod|grep kvm", 3)) {
-                s_logger.debug("It's not a KVM enabled machine");
-                return null;
-            }
+            //if (!SSHCmdHelper.sshExecuteCmd(sshConnection, "lsmod|grep kvm", 3)) {
+            //    s_logger.debug("It's not a KVM enabled machine");
+            //    return null;
+            //}
 
             List<PhysicalNetworkSetupInfo> netInfos = _networkMgr.getPhysicalNetworkInfo(dcId, getHypervisorType());
             String kvmPrivateNic = null;

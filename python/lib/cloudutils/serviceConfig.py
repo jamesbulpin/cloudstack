@@ -489,15 +489,15 @@ class libvirtConfigRedhat(serviceCfgBase):
             cfo.addEntry("LIBVIRTD_ARGS", "-l")
             cfo.save()
 
-            filename = "/etc/libvirt/qemu.conf"
+            #filename = "/etc/libvirt/qemu.conf"
 
-            cfo = configFileOps(filename, self)
-            cfo.addEntry("cgroup_controllers", "[\"cpu\"]")
-            cfo.addEntry("security_driver", "\"none\"")
-            cfo.addEntry("user", "\"root\"")
-            cfo.addEntry("group", "\"root\"")
-            cfo.addEntry("vnc_listen", "\"0.0.0.0\"")
-            cfo.save()
+            #cfo = configFileOps(filename, self)
+            #cfo.addEntry("cgroup_controllers", "[\"cpu\"]")
+            #cfo.addEntry("security_driver", "\"none\"")
+            #cfo.addEntry("user", "\"root\"")
+            #cfo.addEntry("group", "\"root\"")
+            #cfo.addEntry("vnc_listen", "\"0.0.0.0\"")
+            #cfo.save()
 
             self.syscfg.svo.stopService("libvirtd")
             if not self.syscfg.svo.startService("libvirtd"):

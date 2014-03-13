@@ -128,9 +128,9 @@ class sysConfigAgent(sysConfig):
         if not hostname.isSuccess():
             raise CloudInternalException("Checking hostname ... [Failed]\nPlease edit /etc/hosts, add a Fully Qualified Domain Name as your hostname\n")
 
-        kvmEnabled = self.svo.isKVMEnabled()
-        if not kvmEnabled:
-            raise CloudInternalException("Checking KVM...[Failed]\nPlease enable KVM on this machine\n")
+        #kvmEnabled = self.svo.isKVMEnabled()
+        #if not kvmEnabled:
+        #    raise CloudInternalException("Checking KVM...[Failed]\nPlease enable KVM on this machine\n")
         
         return True
 
@@ -156,7 +156,7 @@ class sysConfigAgentUbuntu(sysConfigAgent):
 class sysConfigRedhat6(sysConfigAgentRedhatBase):
     def __init__(self, glbEnv):
         super(sysConfigRedhat6, self).__init__(glbEnv)
-        self.services = [cgroupConfig(self),
+        self.services = [ # cgroupConfig(self),
                          securityPolicyConfigRedhat(self),
                          networkConfigRedhat(self),
                          libvirtConfigRedhat(self),
