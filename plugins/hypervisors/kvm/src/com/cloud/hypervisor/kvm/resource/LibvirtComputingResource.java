@@ -3718,7 +3718,7 @@ ServerResource {
                 } else {
                     if (volume.getType() == Volume.Type.DATADISK) {
                         disk.defFileBasedDisk(physicalDisk.getPath(), devId,
-                                DiskDef.diskBus.VIRTIO,
+                                DiskDef.diskBus.IDE/*VIRTIO HACK*/,
                                 DiskDef.diskFmtType.QCOW2);
                     } else {
                         disk.defFileBasedDisk(physicalDisk.getPath(), devId, diskBusType, DiskDef.diskFmtType.QCOW2);
@@ -4005,7 +4005,7 @@ ServerResource {
 
         final StartupRoutingCommand cmd = new StartupRoutingCommand(
                 (Integer) info.get(0), (Long) info.get(1), (Long) info.get(2),
-                (Long) info.get(4), (String) info.get(3), _hypervisorType,
+                (Long) info.get(4), (String) info.get(3), (_hypervisorType==HypervisorType.XEN)?HypervisorType.KVM:_hypervisorType,
                 RouterPrivateIpStrategy.HostLocal);
         cmd.setStateChanges(changes);
         fillNetworkInformation(cmd);
@@ -4633,6 +4633,8 @@ ServerResource {
     }
 
     boolean isGuestPVEnabled(String guestOS) {
+        return false; /* HACK to make everything run fully-virt */
+/*
         if (guestOS == null) {
             return false;
         }
@@ -4658,6 +4660,7 @@ ServerResource {
         } else {
             return false;
         }
+*/
     }
 
     public boolean isCentosHost() {
