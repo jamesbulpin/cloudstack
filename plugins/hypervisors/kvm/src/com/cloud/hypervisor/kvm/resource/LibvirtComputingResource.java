@@ -3415,6 +3415,11 @@ ServerResource {
             // LXC domain is only valid for user VMs. Use KVM for system VMs.
             guest.setGuestType(GuestDef.guestType.LXC);
             vm.setHvsType(HypervisorType.LXC.toString().toLowerCase());
+        } else if (HypervisorType.XEN == _hypervisorType) {
+            guest.setGuestType(GuestDef.guestType.XEN);
+            vm.setHvsType(HypervisorType.XEN.toString().toLowerCase());
+            vm.setLibvirtVersion(_hypervisorLibvirtVersion);
+            vm.setQemuVersion(_hypervisorQemuVersion);
         } else {
             guest.setGuestType(GuestDef.guestType.KVM);
             vm.setHvsType(HypervisorType.KVM.toString().toLowerCase());
@@ -4245,6 +4250,15 @@ ServerResource {
         } catch (LibvirtException e) {
             s_logger.debug("Failed to get connection: " + e.getMessage());
         }
+        }
+
+        if (_hypervisorType == HypervisorType.XEN) {
+            try {
+                conn = LibvirtConnection.getConnectionByType(HypervisorType.XEN.toString());
+                vmStates.putAll(getAllVms(conn));
+            } catch (LibvirtException e) {
+                s_logger.debug("Failed to get connection: " + e.getMessage());
+            }
         }
 
         return vmStates;

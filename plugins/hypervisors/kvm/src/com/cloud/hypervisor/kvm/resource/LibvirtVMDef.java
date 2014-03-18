@@ -119,6 +119,12 @@ public class LibvirtVMDef {
                 guestDef.append("<init>/sbin/init</init>\n");
                 guestDef.append("</os>\n");
                 return guestDef.toString();
+            } else if (_type == guestType.XEN) {
+                StringBuilder guestDef = new StringBuilder();
+                guestDef.append("<os>\n");
+                guestDef.append("<type>hvm</type>\n");
+                guestDef.append("</os>\n");
+                return guestDef.toString();
              } else {
                 return null;
             }
